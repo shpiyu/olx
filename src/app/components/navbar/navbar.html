@@ -5,13 +5,23 @@
         <a href="index.html" class="navbar-brand">OLX</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" data-toggle="modal" data-target="#myModal">Login/SignUp</a></li>
+        <li *ngIf="!isLoggedIn"><a href="#" data-toggle="modal" data-target="#myModal">Login/SignUp</a></li>
+
+		<div *ngIf="isLoggedIn" class="user-dropdown">
+            <li><a href="#"><span class="glyphicon glyphicon-user user-icon"></span></a></li>
+            <div class="user-dropdown-content dropdown-menu-right" style="padding-top:5px;">
+              <a href="profile.html">Hello {{userName}}</a>
+              <a routerLink="/newAd">Post a new ad</a>
+              <a href="account.html">My Account</a>
+			  <a href="">Log Out</a>
+            </div>
+          </div>
     </ul>
     </div>
 </nav>
 
 <!--login modal-->
-<div id="myModal" class="modal fade" role="dialog">
+<div #myModal id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -39,53 +49,86 @@
       						<div class="row">
       							<div class="col-lg-12">
 									  <!--login form-->
-      								<form id="login-form" #loginForm action="#" method="post" role="form" style="display: block;">
+      								<form  id="login-form" #loginForm #loginNgForm="ngForm" (ngSubmit)="login(loginNgForm.value)" role="form" style="display: block;" novalidate>
       									<div class="form-group">
-      										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+      										<input type="text" required name="userName"  tabindex="1" class="form-control" placeholder="Username" #usernameRefModel="ngModel" ngModel>
+											<div class="error-box" [hidden]="usernameRefModel.untouched || usernameRefModel.dirty"> 
+												Enter your username
+											</div>
       									</div>
       									<div class="form-group">
-      										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+      										<input type="password" required name="password"  tabindex="2" class="form-control" placeholder="Password" #passwordRefModel="ngModel" ngModel>
+											<div class="error-box" [hidden]="passwordRefModel.untouched || passwordRefModel.dirty"> 
+												Enter your password
+											</div>
       									</div>
-      									<div class="form-group text-center">
-      										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-      										<label for="remember"> Remember Me</label>
-      									</div>
+      									<div *ngIf="loginFailed" class="loginfailed">
+											Username or password is incorrect. Please try again.
+										</div>
       									<div class="form-group">
       										<div class="row">
       											<div class="col-sm-6 col-sm-offset-3">
-      												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+      												<button [disabled]="!loginNgForm.form.valid" type="submit" name="login-submit"  tabindex="3" class="form-control btn btn-login">Log In </button>
       											</div>
       										</div>
       									</div>
-      									<div class="form-group">
-      										<div class="row">
-      											<div class="col-lg-12">
-      												<div class="text-center">
-      													<a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
-      												</div>
-      											</div>
-      										</div>
-      									</div>
+
       								</form>
 
 									  <!--register-form-->
-      								<form id="register-form"  #registerForm action="#" method="post" role="form" style="display: none;">
+      								<form id="register-form"  #registerForm #registerNgForm="ngForm" role="form" (ngSubmit)="register(registerNgForm.value)" style="display: none;">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<input type="text" name="firstName" required tabindex="1" class="form-control" placeholder="Firstname"  #fnameRefModel="ngModel" ngModel>
+													<div class="error-box" [hidden]="fnameRefModel.untouched || fnameRefModel.dirty"> 
+														Enter your first name
+													</div>
+      											</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<input type="text" name="lastName" required tabindex="1" class="form-control" placeholder="Lastname"  #lnameRefModel="ngModel" ngModel>
+													<div class="error-box" [hidden]="lnameRefModel.untouched || lnameRefModel.dirty"> 
+														Enter your last name
+													</div>
+      											</div>
+											</div>
+										</div>
       									<div class="form-group">
-      										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+      										<input type="text" name="userName"required tabindex="1" class="form-control" placeholder="Username"  #nameRefModel="ngModel" ngModel>
+											<div class="error-box" [hidden]="nameRefModel.untouched || nameRefModel.dirty"> 
+												Choose a username
+											</div>
+											
+										  <div *ngIf="registrationFailed"> 
+												Username already exists
+											</div>
+      									</div>
+										  <div class="form-group">
+      										<input type="password" name="password" required tabindex="3" class="form-control" placeholder="Password" #passRefModel="ngModel" ngModel>
+											<div class="error-box" [hidden]="passRefModel.untouched || passRefModel.dirty"> 
+												Enter your password
+											</div>
       									</div>
       									<div class="form-group">
-      										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+      										<input type="email" name="email" required  tabindex="2" class="form-control" placeholder="Email Address" #emailRefModel="ngModel" ngModel >
+											<div class="error-box" [hidden]="emailRefModel.untouched || emailRefModel.dirty"> 
+												Enter your email
+											</div>
       									</div>
-      									<div class="form-group">
-      										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-      									</div>
-      									<div class="form-group">
-      										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-      									</div>
+
+      									
+										<div class="form-group">
+											<input type="text" name="phone" required class="form-control" placeholder="Phone Number" #numberRefModel="ngModel" ngModel>
+											<div class="error-box" [hidden]="numberRefModel.untouched || numberRefModel.dirty"> 
+												Enter your phone number
+											</div>
+										</div>
       									<div class="form-group">
       										<div class="row">
       											<div class="col-sm-6 col-sm-offset-3">
-      												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+      												<input [disabled]="!registerNgForm.form.valid" type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
       											</div>
       										</div>
       									</div>

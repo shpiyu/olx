@@ -37,7 +37,7 @@
             <div class="categories">
               <div class="cat-dropdown">
                 <ul >
-                  <li *ngFor="let category of categories"><a href="#">{{category}}</a></li>
+                  <li *ngFor="let category of categories"><a (click)="filter(category)" >{{category}}</a></li>
                 </ul>
               </div>
 
