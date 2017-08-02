@@ -8,19 +8,21 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppComponent }  from './app.component';
 import { NewAdComponent } from './components/newAd/newAd.component';
+import { MyAdsComponent } from './components/myAds/myAds.component';
 import { FormsModule } from '@angular/forms';
 import * as $ from "jquery";
 @NgModule({
   imports:      [ BrowserModule, HttpModule, FormsModule, RouterModule.forRoot([
-                  
+
                   {path:"newAd", component: NewAdComponent},
+                  {path:"myAds", component: MyAdsComponent},
                   {path:"", component: HomeComponent},
                   {path:":category", component: HomeComponent},
-                  
-                  
-                  
+
+
+
   ]) ],
-  declarations: [ AppComponent, NavbarComponent, FooterComponent, SearchbarComponent, HomeComponent, NewAdComponent  ],
+  declarations: [ AppComponent, NavbarComponent, FooterComponent, SearchbarComponent, HomeComponent, NewAdComponent, MyAdsComponent  ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

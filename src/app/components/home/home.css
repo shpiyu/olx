@@ -27,3 +27,12 @@
   text-decoration: none;
   color: #242424;
 }
+
+.noResults{
+  color: rgba(0,0,0,0.6);
+  font-size: 64px;
+  font-weight: bolder;
+  text-align: center;
+  padding: 50px 0px 70px 0px;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+}

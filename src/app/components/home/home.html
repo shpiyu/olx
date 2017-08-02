@@ -2,15 +2,19 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2" id="adlists">
             <div class="ad-box" *ngFor="let ad of advertisements">
-              
-               
-                
+
+
+
                   <a href="product.html" class="product-title"><h2>{{ad.title}}</h2></a>
                   <p style="color:#4e4e4e;">posted by <a href="#">{{ad.username}}</a> on <span class="date">{{ad.date}}</span></p>
                   <p class="prod-desc">{{ad.description}}</p>
-                
-                
-              
+
+
+
+            </div>
+
+            <div *ngIf="this.advertisements.length==0" class="noResults">
+              Couldn't connect to server. Try again.
             </div>
 </div>
 

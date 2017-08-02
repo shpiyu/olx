@@ -6,22 +6,31 @@
             <div class="form-group">
               <label for="title">Title</label>
               <input type="text" required name="title" class="form-control" placeholder="Give your product a title" #titleRefModel="ngModel" ngModel>
+              <div class="form-error" [hidden]="titleRefModel.untouched && titleRefModel.pristine">
+                Enter a title
+              </div>
             </div>
             <div class="form-group">
               <label for="title">Name</label>
               <input type="text" required name="name" class="form-control" placeholder="Give your product a title" #nameRefModel="ngModel" ngModel>
+              <div class="form-error" [hidden]="nameRefModel.untouched && nameRefModel.pristine">
+                Enter a title
+              </div>
             </div>
             <div class="form-group">
               <label for="sel1">Categories</label>
               <select class="form-control" required name="category" #categoriesRefModel="ngModel" ngModel>
                 <option disabled selected style="color:#555">select one</option>
                 <option *ngFor="let category of categories">{{category}}</option>
-                
+
               </select>
             </div>
             <div class="form-group">
               <label for="desc">Description</label>
               <textarea class="form-control" required name="description" rows="3" #descRefModel="ngModel" ngModel placeholder="Describe your product in few lines"></textarea>
+              <div class="form-error" [hidden]="descRefModel.untouched && descRefModel.pristine">
+                Enter a title
+              </div>
             </div>
 
             <button (click)="postNewAd(productForm.value)"  class="btn my-btn">publish ad <span class="glyphicon glyphicon-arrow-right" style="float:right;"></span></button>

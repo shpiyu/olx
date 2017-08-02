@@ -23,7 +23,7 @@ export class HomeComponent{
              this.urlCategory = val.category;
              this.filterAdsByCategory(this.urlCategory);
          })
-        
+
         if(this.urlCategory!=undefined ){
             console.log("urlCategory", this.urlCategory);
             console.log("it'll work");
@@ -42,7 +42,7 @@ export class HomeComponent{
             });
         });
     }
-    
+
     }
 
     filterAdsByCategory(category:string){
@@ -51,7 +51,7 @@ export class HomeComponent{
             console.log(category, " ads recieved");
             this.advertisements = [];
             response.data.advertiseList.forEach((ad:any)=>{
-                
+
                 this.advertisements.push({
                     "title":ad.title,
                     "username":ad.name,
@@ -67,6 +67,6 @@ export class HomeComponent{
         console.log(this.advertisements);
     }
 
-    
+
 
 }

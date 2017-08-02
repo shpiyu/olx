@@ -23,7 +23,7 @@ export class NavbarComponent{
     registrationFailed:boolean=false;
     userName:string;
     constructor(private userSrvice:UserService, private router:Router){
-        
+
     }
 
     showLogin(){
@@ -32,7 +32,7 @@ export class NavbarComponent{
         $(this.registerForm.nativeElement).fadeOut(100);
         $(this.registerFormLink.nativeElement).removeClass('active');
         $(this.loginFormLink.nativeElement).addClass('active');
-        
+
     }
 
     showRegister(){
@@ -72,6 +72,5 @@ export class NavbarComponent{
     }
 
 
-    
-}
 
+}
